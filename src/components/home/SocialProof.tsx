@@ -150,14 +150,12 @@ export function SocialProof() {
         {/* Testimonial cards - masonry-like with varying heights */}
         <div
           ref={cardsRef}
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start"
         >
-          {testimonials.map((testimonial, i) => (
+          {testimonials.map((testimonial) => (
             <div
               key={testimonial.name}
-              className={`group relative rounded-2xl border border-white/10 bg-white/[0.04] p-7 hover:border-tapcraft-blue/30 transition-[border-color] duration-500 ${
-                i === 1 ? "md:mt-8" : ""
-              }`}
+              className="group relative rounded-2xl border border-white/10 bg-white/[0.04] p-7 hover:border-tapcraft-blue/30 transition-[border-color] duration-500"
             >
               {/* Highlight badge */}
               <div className="inline-flex items-center gap-2 bg-tapcraft-blue/10 rounded-full px-3 py-1.5 mb-5">

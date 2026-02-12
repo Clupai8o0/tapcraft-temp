@@ -104,7 +104,7 @@ function FAQItemComponent({
   }, [isOpen]);
 
   return (
-    <div className="border-b border-white/10 last:border-b-0">
+    <div>
       <button
         ref={buttonRef}
         onClick={() => {
@@ -228,27 +228,29 @@ export function FAQ() {
           </div>
 
           {/* Two-column FAQ grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 md:p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+            <div className="space-y-3">
               {leftFaqs.map((faq, index) => (
-                <FAQItemComponent
-                  key={index}
-                  item={faq}
-                  isOpen={openIndex === index}
-                  onToggle={() => handleToggle(index)}
-                />
+                <div key={index} className="rounded-2xl bg-white/[0.03] border border-white/10 px-6 md:px-8">
+                  <FAQItemComponent
+                    item={faq}
+                    isOpen={openIndex === index}
+                    onToggle={() => handleToggle(index)}
+                  />
+                </div>
               ))}
             </div>
-            <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 md:p-8">
+            <div className="space-y-3">
               {rightFaqs.map((faq, index) => {
                 const actualIndex = index + midpoint;
                 return (
-                  <FAQItemComponent
-                    key={actualIndex}
-                    item={faq}
-                    isOpen={openIndex === actualIndex}
-                    onToggle={() => handleToggle(actualIndex)}
-                  />
+                  <div key={actualIndex} className="rounded-2xl bg-white/[0.03] border border-white/10 px-6 md:px-8">
+                    <FAQItemComponent
+                      item={faq}
+                      isOpen={openIndex === actualIndex}
+                      onToggle={() => handleToggle(actualIndex)}
+                    />
+                  </div>
                 );
               })}
             </div>
