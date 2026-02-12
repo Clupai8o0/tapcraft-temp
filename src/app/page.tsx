@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ValueProposition } from "@/components/home/ValueProposition";
-import { FeaturedProducts } from "@/components/home/FeaturedProducts";
+
 import { ProcessOverview } from "@/components/home/ProcessOverview";
 import { SocialProof } from "@/components/home/SocialProof";
-import { MelbourneMade } from "@/components/home/MelbourneMade";
+
 import { FAQ } from "@/components/home/FAQ";
 import { EmailCapture } from "@/components/home/EmailCapture";
 
@@ -46,9 +46,9 @@ export default function HomePage() {
         <HeroSection />
         <ValueProposition />
         <ProcessOverview />
-        <FeaturedProducts />
+
         <SocialProof />
-        <MelbourneMade />
+
         <FAQ />
         <EmailCapture />
       </main>

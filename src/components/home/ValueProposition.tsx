@@ -100,6 +100,15 @@ export function ValueProposition() {
 						Your browser does not support the video tag.
 					</video>
 				</div>
+
+				<div className="text-center">
+					<a
+						href="/catalogue"
+						className="inline-block px-8 py-4 bg-tapcraft-blue text-tapcraft-white text-lg font-medium rounded-full hover:bg-tapcraft-blue/90 transition-colors"
+					>
+						View Catalogue
+					</a>
+				</div>
 			</div>
 		</section>
 	);
