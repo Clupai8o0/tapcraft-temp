@@ -208,7 +208,19 @@ export function HeroSection() {
         </div>
 
         {/* Featured product cards */}
-        <div ref={cardsRef} className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="mt-20 text-center mb-10">
+          <Copy animateOnScroll>
+            <p className="text-tapcraft-blue text-sm font-semibold tracking-widest uppercase mb-3">
+              Trending Now
+            </p>
+          </Copy>
+          <Copy animateOnScroll delay={0.1}>
+            <h2 className="text-3xl md:text-4xl font-normal text-white tracking-tight">
+              Fan Favourites
+            </h2>
+          </Copy>
+        </div>
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {products.map((product) => (
             <div
               key={product.id}
