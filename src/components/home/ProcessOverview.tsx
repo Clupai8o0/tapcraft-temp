@@ -15,80 +15,58 @@ const steps = [
     title: "Design",
     description:
       "Share your vision with our team. We create a custom 3D model tailored to your brand, product, or event needs.",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
-      </svg>
-    ),
+    detail: "Consultation + 3D Modelling",
   },
   {
     number: "02",
     title: "Print",
     description:
       "Your design is precision-printed using premium materials in our Melbourne studio with state-of-the-art 3D printers.",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
-      </svg>
-    ),
+    detail: "PLA, PETG, Resin & more",
   },
   {
     number: "03",
     title: "Integrate",
     description:
       "We embed and program NFC chips into your product, linking them to your chosen digital content or platform.",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0" />
-        <circle cx="12" cy="18" r="1.5" fill="currentColor" />
-      </svg>
-    ),
+    detail: "NFC Programming + Testing",
   },
   {
     number: "04",
     title: "Deliver",
     description:
       "Quality-checked and carefully packaged, your smart products are delivered ready to impress and connect.",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
-      </svg>
-    ),
+    detail: "AU & International Shipping",
   },
 ];
 
 export function ProcessOverview() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const stepsRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
-  const dividerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      // Set initial states — GSAP owns opacity & transform exclusively
-      if (badgeRef.current) gsap.set(badgeRef.current, { opacity: 0, x: -10 });
-      if (dividerRef.current) gsap.set(dividerRef.current, { scaleX: 0 });
-      if (stepsRef.current) gsap.set(stepsRef.current.children, { opacity: 0, y: 40 });
+      if (lineRef.current) gsap.set(lineRef.current, { scaleY: 0 });
+      if (timelineRef.current) gsap.set(timelineRef.current.children, { opacity: 0, x: -30 });
       if (ctaRef.current) gsap.set(ctaRef.current, { opacity: 0, y: 20 });
 
-      // Animate on scroll
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: "top 80%",
+        start: "top 70%",
         once: true,
         onEnter: () => {
-          if (badgeRef.current) {
-            gsap.to(badgeRef.current, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" });
+          if (lineRef.current) {
+            gsap.to(lineRef.current, { scaleY: 1, duration: 1.5, ease: "power2.out" });
           }
-          if (dividerRef.current) {
-            gsap.to(dividerRef.current, { scaleX: 1, duration: 0.8, ease: "power2.out" });
-          }
-          if (stepsRef.current) {
-            gsap.to(stepsRef.current.children, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out", stagger: 0.15 });
+          if (timelineRef.current) {
+            gsap.to(timelineRef.current.children, {
+              opacity: 1, x: 0, duration: 1, ease: "power2.out", stagger: 0.2, delay: 0.2,
+            });
           }
           if (ctaRef.current) {
-            gsap.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.3 });
+            gsap.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 1 });
           }
         },
       });
@@ -97,94 +75,107 @@ export function ProcessOverview() {
   );
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Header area */}
-        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-tapcraft-light relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
           <div>
-            <div ref={badgeRef} className="flex items-center gap-2 mb-4">
-              <span className="w-2.5 h-2.5 rounded-full bg-tapcraft-blue" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-tapcraft-blue">
-                4 Simple Steps
-              </span>
-            </div>
             <Copy animateOnScroll>
-              <h2 className="text-4xl md:text-5xl font-semibold text-tapcraft-dark leading-tight tracking-tight">
-                Effortless Process,
+              <p className="text-tapcraft-blue text-sm font-semibold tracking-widest uppercase mb-4">
+                How It Works
+              </p>
+            </Copy>
+            <Copy animateOnScroll delay={0.1}>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-tapcraft-dark tracking-tight leading-[1.1]">
+                From Idea to
                 <br />
-                Continuous Quality
+                Smart Product
               </h2>
             </Copy>
           </div>
-          <div
-            ref={dividerRef}
-            className="hidden md:block flex-1 max-w-sm h-px bg-linear-to-r from-tapcraft-dark/20 to-transparent origin-left ml-8 mb-3"
-          />
-        </div>
-
-        {/* Steps grid */}
-        <div
-          ref={stepsRef}
-          className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
-        >
-          {steps.map((step) => (
-            <div
-              key={step.number}
-              className="group relative rounded-2xl bg-gray-50 border border-gray-200 p-6 flex flex-col justify-between min-h-65 hover:bg-tapcraft-blue hover:border-tapcraft-blue transition-[background-color,border-color] duration-300 cursor-default"
-            >
-              {/* Icon + Step number */}
-              <div>
-                <div className="w-9 h-9 rounded-lg bg-tapcraft-blue/10 text-tapcraft-blue flex items-center justify-center mb-3 group-hover:bg-white/15 group-hover:text-white transition-colors duration-300">
-                  {step.icon}
-                </div>
-                <span className="text-3xl font-bold text-tapcraft-dark/80 group-hover:text-white/90 block mb-1 transition-colors duration-300">
-                  {step.number}.
-                </span>
-                <h3 className="text-xl font-semibold text-tapcraft-dark group-hover:text-white transition-colors duration-300">
-                  {step.title}
-                </h3>
-              </div>
-
-              {/* Description at bottom */}
-              <p className="text-sm text-tapcraft-gray leading-relaxed mt-6 group-hover:text-white/70 transition-colors duration-300">
-                {step.description}
+          <div className="flex items-end">
+            <Copy animateOnScroll delay={0.2}>
+              <p className="text-tapcraft-gray text-lg leading-relaxed max-w-md">
+                Four simple steps to transform your concept into a beautifully
+                crafted, NFC-enabled physical product.
               </p>
-            </div>
-          ))}
+            </Copy>
+          </div>
         </div>
 
-        {/* CTA bar */}
-        <div
-          ref={ctaRef}
-          className="relative flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-gray-50 border border-gray-200 px-6 py-4"
-        >
-          <p className="text-tapcraft-gray text-sm">
-            Trusted by businesses that choose{" "}
-            <span className="text-tapcraft-dark font-semibold">
-              Smart Products
-            </span>
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2.5 h-11 px-7 rounded-full bg-tapcraft-blue text-white text-sm font-semibold hover:bg-blue-600 transition-colors no-underline shadow-lg shadow-tapcraft-blue/25 shrink-0"
-          >
-            <span className="w-7 h-7 rounded-full border-2 border-white/40 flex items-center justify-center">
-              <svg
-                className="w-3.5 h-3.5 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                />
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical line */}
+          <div
+            ref={lineRef}
+            className="absolute left-[23px] md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-tapcraft-blue/20 origin-top hidden sm:block"
+          />
+
+          <div ref={timelineRef} className="space-y-8 md:space-y-0">
+            {steps.map((step, i) => {
+              const isEven = i % 2 === 0;
+              return (
+                <div
+                  key={step.number}
+                  className={`relative md:grid md:grid-cols-2 md:gap-12 ${
+                    i > 0 ? "md:mt-[-40px]" : ""
+                  }`}
+                  style={{ paddingTop: i > 0 ? "2rem" : 0 }}
+                >
+                  {/* Timeline dot */}
+                  <div className="absolute left-[15px] md:left-1/2 md:-translate-x-1/2 top-0 md:top-8 w-[18px] h-[18px] rounded-full bg-tapcraft-light border-[3px] border-tapcraft-blue z-10 hidden sm:block" />
+
+                  {/* Content - alternating sides */}
+                  <div
+                    className={`${isEven ? "md:pr-16 md:text-right" : "md:col-start-2 md:pl-16"} pl-14 sm:pl-0`}
+                  >
+                    <div
+                      className={`group bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg border border-gray-100 hover:border-tapcraft-blue/20 transition-all duration-300 ${
+                        isEven ? "" : ""
+                      }`}
+                    >
+                      <div className={`flex items-center gap-3 mb-4 ${isEven ? "md:justify-end" : ""}`}>
+                        <span className="text-xs font-bold tracking-widest text-tapcraft-blue bg-tapcraft-blue/10 px-3 py-1.5 rounded-full">
+                          STEP {step.number}
+                        </span>
+                        <span className="text-xs text-tapcraft-gray">{step.detail}</span>
+                      </div>
+
+                      <h3 className="text-2xl md:text-3xl font-bold text-tapcraft-dark mb-3 group-hover:text-tapcraft-blue transition-colors duration-300">
+                        {step.title}
+                      </h3>
+
+                      <p className="text-tapcraft-gray leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Empty grid cell for alternating layout */}
+                  {isEven ? <div className="hidden md:block" /> : null}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div ref={ctaRef} className="mt-20 text-center">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-tapcraft-dark rounded-2xl px-8 py-6">
+            <p className="text-gray-400 text-sm">
+              Ready to create something{" "}
+              <span className="text-white font-semibold">extraordinary</span>?
+            </p>
+            <Link
+              href="/customize"
+              className="inline-flex items-center gap-2.5 h-11 px-7 rounded-full bg-tapcraft-blue text-white text-sm font-semibold hover:bg-blue-600 transition-colors no-underline shadow-lg shadow-tapcraft-blue/25"
+            >
+              Start Your Project
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
-            </span>
-            Start Now
-          </Link>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

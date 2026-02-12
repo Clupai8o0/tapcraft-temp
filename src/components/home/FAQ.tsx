@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -32,7 +33,7 @@ const faqs: FAQItem[] = [
   {
     question: "What industries do you serve?",
     answer:
-      "We work across a wide range of industries including real estate, events and conferences, retail and e-commerce, hospitality, education, arts and design, and professional services. If your business can benefit from a smart, connected physical product, we can help. Get in touch and we will design something perfect for your use case.",
+      "We work across a wide range of industries including real estate, events and conferences, retail and e-commerce, hospitality, education, arts and design, and professional services. If your business can benefit from a smart, connected physical product, we can help.",
   },
   {
     question: "Can I update the NFC content after delivery?",
@@ -42,7 +43,7 @@ const faqs: FAQItem[] = [
   {
     question: "How does pricing work?",
     answer:
-      "Pricing depends on the product type, complexity of the 3D design, materials chosen, and order quantity. We offer competitive per-unit pricing that decreases with larger orders. Custom designs start from $35, and we provide transparent quotes upfront so there are never any surprises. Contact us for a free quote.",
+      "Pricing depends on the product type, complexity of the 3D design, materials chosen, and order quantity. We offer competitive per-unit pricing that decreases with larger orders. Custom designs start from $35, and we provide transparent quotes upfront so there are never any surprises.",
   },
   {
     question: "Do you ship internationally?",
@@ -102,19 +103,19 @@ function FAQItemComponent({
   }, [isOpen]);
 
   return (
-    <div className="border-b border-gray-200 last:border-b-0">
+    <div className="border-b border-white/10 last:border-b-0">
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between py-5 text-left cursor-pointer group"
         aria-expanded={isOpen}
       >
-        <span className="text-base md:text-lg font-medium text-tapcraft-dark pr-4 group-hover:text-tapcraft-blue transition-colors">
+        <span className="text-base md:text-lg font-medium text-white pr-4 group-hover:text-tapcraft-blue transition-colors">
           {item.question}
         </span>
-        <span className="flex-shrink-0 text-tapcraft-gray">
+        <span className="flex-shrink-0 text-gray-500 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-tapcraft-blue/10 transition-colors">
           <svg
             ref={iconRef}
-            className="w-5 h-5"
+            className="w-4 h-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -126,7 +127,7 @@ function FAQItemComponent({
       </button>
 
       <div ref={contentRef} className="overflow-hidden" style={{ height: 0, display: "none" }}>
-        <p className="pb-5 text-tapcraft-gray leading-relaxed pr-8">
+        <p className="pb-5 text-gray-400 leading-relaxed pr-12">
           {item.answer}
         </p>
       </div>
@@ -163,36 +164,93 @@ export function FAQ() {
     setOpenIndex((prev) => (prev === index ? null : index));
   }, []);
 
-  return (
-		<section ref={sectionRef} className="py-20 md:py-28 bg-tapcraft-light">
-			<div className="max-w-3xl mx-auto px-6">
-				<div ref={contentRef}>
-					<div className="text-center mb-12">
-            <Copy animateOnScroll>
-              <h2 className="text-5xl md:text-6xl text-tapcraft-dark font-normal">
-                Frequently Asked Questions
-              </h2>
-            </Copy>
-            <Copy animateOnScroll delay={0.2}>
-              <p className="mt-4 text-tapcraft-gray text-lg">
-                Everything you need to know about our 3D + NFC products and
-                process.
-              </p>
-            </Copy>
-					</div>
+  // Split FAQs into two columns
+  const midpoint = Math.ceil(faqs.length / 2);
+  const leftFaqs = faqs.slice(0, midpoint);
+  const rightFaqs = faqs.slice(midpoint);
 
-					<div className="bg-white rounded-2xl shadow-sm p-6 md:p-8">
-						{faqs.map((faq, index) => (
-							<FAQItemComponent
-								key={index}
-								item={faq}
-								isOpen={openIndex === index}
-								onToggle={() => handleToggle(index)}
-							/>
-						))}
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+  return (
+    <section ref={sectionRef} className="py-24 md:py-32 bg-black relative overflow-hidden">
+      {/* Background decoration */}
+      <div
+        className="absolute bottom-0 left-0 w-150 h-150 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle at 0% 100%, rgba(30,115,255,0.05) 0%, transparent 60%)",
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div ref={contentRef}>
+          {/* Two-column header */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            <div>
+              <Copy animateOnScroll>
+                <p className="text-tapcraft-blue text-sm font-semibold tracking-widest uppercase mb-4">
+                  FAQ
+                </p>
+              </Copy>
+              <Copy animateOnScroll delay={0.1}>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold tracking-tight leading-[1.1]">
+                  Got Questions?
+                  <br />
+                  We&apos;ve Got Answers.
+                </h2>
+              </Copy>
+            </div>
+            <div className="flex items-end">
+              <Copy animateOnScroll delay={0.2}>
+                <p className="text-gray-400 text-lg leading-relaxed max-w-md">
+                  Everything you need to know about our 3D + NFC products, process,
+                  and how to get started.
+                </p>
+              </Copy>
+            </div>
+          </div>
+
+          {/* Two-column FAQ grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 md:p-8">
+              {leftFaqs.map((faq, index) => (
+                <FAQItemComponent
+                  key={index}
+                  item={faq}
+                  isOpen={openIndex === index}
+                  onToggle={() => handleToggle(index)}
+                />
+              ))}
+            </div>
+            <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 md:p-8">
+              {rightFaqs.map((faq, index) => {
+                const actualIndex = index + midpoint;
+                return (
+                  <FAQItemComponent
+                    key={actualIndex}
+                    item={faq}
+                    isOpen={openIndex === actualIndex}
+                    onToggle={() => handleToggle(actualIndex)}
+                  />
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="mt-12 text-center">
+            <p className="text-gray-500 text-sm mb-4">
+              Still have questions?
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-tapcraft-blue text-sm font-semibold hover:underline no-underline"
+            >
+              Get in touch with our team
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
