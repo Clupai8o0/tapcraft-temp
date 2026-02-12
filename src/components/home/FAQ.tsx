@@ -68,6 +68,7 @@ function FAQItemComponent({
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<SVGSVGElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -76,6 +77,7 @@ function FAQItemComponent({
       gsap.set(contentRef.current, { display: "block", height: 0, opacity: 0 });
       gsap.to(contentRef.current, {
         height: "auto", opacity: 1, duration: 0.3, ease: "power2.inOut",
+        onComplete: () => ScrollTrigger.refresh(),
       });
     } else {
       gsap.to(contentRef.current, {
@@ -85,6 +87,7 @@ function FAQItemComponent({
         ease: "power2.inOut",
         onComplete: () => {
           if (contentRef.current) gsap.set(contentRef.current, { display: "none" });
+          ScrollTrigger.refresh();
         },
       });
     }
@@ -103,7 +106,26 @@ function FAQItemComponent({
   return (
     <div className="border-b border-white/10 last:border-b-0">
       <button
-        onClick={onToggle}
+        ref={buttonRef}
+        onClick={() => {
+          // Capture button position before toggle so we can pin scroll
+          const rect = buttonRef.current?.getBoundingClientRect();
+          const offsetBefore = rect ? rect.top : 0;
+
+          onToggle();
+
+          // After React re-renders and GSAP animates, restore the button's
+          // viewport position so the page pushes down, not up
+          requestAnimationFrame(() => {
+            if (buttonRef.current) {
+              const rectAfter = buttonRef.current.getBoundingClientRect();
+              const diff = rectAfter.top - offsetBefore;
+              if (Math.abs(diff) > 1) {
+                window.scrollBy({ top: diff, behavior: "instant" });
+              }
+            }
+          });
+        }}
         className="w-full flex items-center justify-between py-5 text-left cursor-pointer group"
         aria-expanded={isOpen}
       >
