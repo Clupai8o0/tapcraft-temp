@@ -78,7 +78,7 @@ export function SocialProof() {
   useGSAP(
     () => {
       if (cardsRef.current) {
-        gsap.set(cardsRef.current.children, { opacity: 0, y: 50 });
+        gsap.set(cardsRef.current.children, { opacity: 0, y: 40 });
       }
       if (statsRef.current) {
         gsap.set(statsRef.current.children, { opacity: 0, y: 20 });
@@ -91,12 +91,12 @@ export function SocialProof() {
         onEnter: () => {
           if (cardsRef.current) {
             gsap.to(cardsRef.current.children, {
-              opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.2,
+              opacity: 1, y: 0, duration: 1.2, ease: "power2.out", stagger: 0.15,
             });
           }
           if (statsRef.current) {
             gsap.to(statsRef.current.children, {
-              opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.1, delay: 0.5,
+              opacity: 1, y: 0, duration: 1, ease: "power2.out", stagger: 0.1, delay: 0.5,
             });
           }
         },
@@ -155,7 +155,7 @@ export function SocialProof() {
           {testimonials.map((testimonial, i) => (
             <div
               key={testimonial.name}
-              className={`group relative rounded-2xl border border-white/10 bg-white/[0.04] p-7 hover:border-tapcraft-blue/30 transition-all duration-500 ${
+              className={`group relative rounded-2xl border border-white/10 bg-white/[0.04] p-7 hover:border-tapcraft-blue/30 transition-[border-color] duration-500 ${
                 i === 1 ? "md:mt-8" : ""
               }`}
             >

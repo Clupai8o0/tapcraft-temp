@@ -73,12 +73,10 @@ function FAQItemComponent({
     if (!contentRef.current) return;
 
     if (isOpen) {
-      gsap.set(contentRef.current, { display: "block" });
-      gsap.fromTo(
-        contentRef.current,
-        { height: 0, opacity: 0 },
-        { height: "auto", opacity: 1, duration: 0.3, ease: "power2.inOut" }
-      );
+      gsap.set(contentRef.current, { display: "block", height: 0, opacity: 0 });
+      gsap.to(contentRef.current, {
+        height: "auto", opacity: 1, duration: 0.3, ease: "power2.inOut",
+      });
     } else {
       gsap.to(contentRef.current, {
         height: 0,

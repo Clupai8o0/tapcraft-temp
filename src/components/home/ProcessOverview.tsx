@@ -49,7 +49,9 @@ export function ProcessOverview() {
   useGSAP(
     () => {
       if (lineRef.current) gsap.set(lineRef.current, { scaleY: 0 });
-      if (timelineRef.current) gsap.set(timelineRef.current.children, { opacity: 0, x: -30 });
+      if (timelineRef.current) {
+        gsap.set(timelineRef.current.children, { opacity: 0, x: -30 });
+      }
       if (ctaRef.current) gsap.set(ctaRef.current, { opacity: 0, y: 20 });
 
       ScrollTrigger.create({
@@ -62,11 +64,11 @@ export function ProcessOverview() {
           }
           if (timelineRef.current) {
             gsap.to(timelineRef.current.children, {
-              opacity: 1, x: 0, duration: 1, ease: "power2.out", stagger: 0.2, delay: 0.2,
+              opacity: 1, x: 0, duration: 1.2, ease: "power2.out", stagger: 0.2, delay: 0.2,
             });
           }
           if (ctaRef.current) {
-            gsap.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 1 });
+            gsap.to(ctaRef.current, { opacity: 1, y: 0, duration: 1, ease: "power2.out", delay: 1 });
           }
         },
       });
@@ -130,9 +132,7 @@ export function ProcessOverview() {
                     className={`${isEven ? "md:pr-16 md:text-right" : "md:col-start-2 md:pl-16"} pl-14 sm:pl-0`}
                   >
                     <div
-                      className={`group bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg border border-gray-100 hover:border-tapcraft-blue/20 transition-all duration-300 ${
-                        isEven ? "" : ""
-                      }`}
+                      className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg border border-gray-100 hover:border-tapcraft-blue/20 transition-[border-color,box-shadow] duration-300"
                     >
                       <div className={`flex items-center gap-3 mb-4 ${isEven ? "md:justify-end" : ""}`}>
                         <span className="text-xs font-bold tracking-widest text-tapcraft-blue bg-tapcraft-blue/10 px-3 py-1.5 rounded-full">

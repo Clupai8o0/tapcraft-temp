@@ -53,11 +53,10 @@ export function EmailCapture() {
 
   useEffect(() => {
     if (submitted && successRef.current) {
-      gsap.fromTo(
-        successRef.current,
-        { opacity: 0, scale: 0.95 },
-        { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
-      );
+      gsap.set(successRef.current, { opacity: 0, y: 20 });
+      gsap.to(successRef.current, {
+        opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
+      });
     }
   }, [submitted]);
 
@@ -114,7 +113,7 @@ export function EmailCapture() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
                 required
-                className="w-full flex-1 h-14 px-5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tapcraft-blue/50 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                className="w-full flex-1 h-14 px-5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tapcraft-blue/50 focus:border-transparent transition-[border-color,box-shadow] duration-200 backdrop-blur-sm"
               />
               <Button
                 type="submit"
@@ -131,7 +130,7 @@ export function EmailCapture() {
             </p>
           </div>
         ) : (
-          <div ref={successRef} className="text-center" style={{ opacity: 0 }}>
+          <div ref={successRef} className="text-center">
             <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
               <svg
                 className="w-8 h-8 text-white"
