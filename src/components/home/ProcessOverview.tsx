@@ -1,9 +1,11 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import Copy from "@/components/Copy";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -57,67 +59,42 @@ const steps = [
 
 export function ProcessOverview() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!sectionRef.current) return;
+  useGSAP(
+    () => {
+      // Set initial states — GSAP owns opacity & transform exclusively
+      if (badgeRef.current) gsap.set(badgeRef.current, { opacity: 0, x: -10 });
+      if (dividerRef.current) gsap.set(dividerRef.current, { scaleX: 0 });
+      if (stepsRef.current) gsap.set(stepsRef.current.children, { opacity: 0, y: 40 });
+      if (ctaRef.current) gsap.set(ctaRef.current, { opacity: 0, y: 20 });
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
+      // Animate on scroll
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          if (badgeRef.current) {
+            gsap.to(badgeRef.current, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" });
+          }
+          if (dividerRef.current) {
+            gsap.to(dividerRef.current, { scaleX: 1, duration: 0.8, ease: "power2.out" });
+          }
+          if (stepsRef.current) {
+            gsap.to(stepsRef.current.children, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out", stagger: 0.15 });
+          }
+          if (ctaRef.current) {
+            gsap.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.3 });
+          }
         },
       });
-
-      // Animate the badge
-      tl.fromTo(
-        ".process-badge",
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }
-      );
-
-      // Animate heading
-      tl.fromTo(
-        ".process-heading",
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-        "-=0.3"
-      );
-
-      // Animate the divider line
-      tl.fromTo(
-        ".process-divider",
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: "power2.inOut" },
-        "-=0.4"
-      );
-
-      // Stagger the step cards
-      tl.fromTo(
-        ".process-step",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          stagger: 0.12,
-        },
-        "-=0.4"
-      );
-
-      // Animate the CTA bar
-      tl.fromTo(
-        ".process-cta",
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-        "-=0.2"
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: sectionRef }
+  );
 
   return (
     <section ref={sectionRef} className="py-20 md:py-28 bg-white">
@@ -125,34 +102,35 @@ export function ProcessOverview() {
         {/* Header area */}
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div className="process-badge flex items-center gap-2 mb-4" style={{ opacity: 0 }}>
+            <div ref={badgeRef} className="flex items-center gap-2 mb-4">
               <span className="w-2.5 h-2.5 rounded-full bg-tapcraft-blue" />
               <span className="text-xs font-semibold tracking-widest uppercase text-tapcraft-blue">
                 4 Simple Steps
               </span>
             </div>
-            <h2
-              className="process-heading text-4xl md:text-5xl font-semibold text-tapcraft-dark leading-tight tracking-tight"
-              style={{ opacity: 0 }}
-            >
-              Effortless Process,
-              <br />
-              Continuous Quality
-            </h2>
+            <Copy animateOnScroll>
+              <h2 className="text-4xl md:text-5xl font-semibold text-tapcraft-dark leading-tight tracking-tight">
+                Effortless Process,
+                <br />
+                Continuous Quality
+              </h2>
+            </Copy>
           </div>
           <div
-            className="process-divider hidden md:block flex-1 max-w-sm h-px bg-linear-to-r from-tapcraft-dark/20 to-transparent origin-left ml-8 mb-3"
-            style={{ transform: "scaleX(0)" }}
+            ref={dividerRef}
+            className="hidden md:block flex-1 max-w-sm h-px bg-linear-to-r from-tapcraft-dark/20 to-transparent origin-left ml-8 mb-3"
           />
         </div>
 
         {/* Steps grid */}
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div
+          ref={stepsRef}
+          className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
+        >
           {steps.map((step) => (
             <div
               key={step.number}
-              className="process-step group relative rounded-2xl bg-gray-50 border border-gray-200 p-6 flex flex-col justify-between min-h-65 hover:bg-tapcraft-blue hover:border-tapcraft-blue transition-all duration-300 cursor-default"
-              style={{ opacity: 0 }}
+              className="group relative rounded-2xl bg-gray-50 border border-gray-200 p-6 flex flex-col justify-between min-h-65 hover:bg-tapcraft-blue hover:border-tapcraft-blue transition-[background-color,border-color] duration-300 cursor-default"
             >
               {/* Icon + Step number */}
               <div>
@@ -177,8 +155,8 @@ export function ProcessOverview() {
 
         {/* CTA bar */}
         <div
-          className="process-cta relative flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-gray-50 border border-gray-200 px-6 py-4"
-          style={{ opacity: 0 }}
+          ref={ctaRef}
+          className="relative flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-gray-50 border border-gray-200 px-6 py-4"
         >
           <p className="text-tapcraft-gray text-sm">
             Trusted by businesses that choose{" "}
