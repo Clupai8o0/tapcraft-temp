@@ -45,8 +45,8 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <ValueProposition />
-        <FeaturedProducts />
         <ProcessOverview />
+        <FeaturedProducts />
         <SocialProof />
         <MelbourneMade />
         <FAQ />
