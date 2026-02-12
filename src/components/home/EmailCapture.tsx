@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect, type FormEvent } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { Button } from "@/components/shared/Button";
+import Copy from "@/components/Copy";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,22 +31,25 @@ export function EmailCapture() {
     }, 600);
   };
 
-  useEffect(() => {
-    if (!formRef.current || submitted) return;
+  useGSAP(
+    () => {
+      if (formRef.current && !submitted) {
+        gsap.set(formRef.current, { opacity: 0, y: 40 });
+      }
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        formRef.current,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [submitted]);
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          if (formRef.current) {
+            gsap.to(formRef.current, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" });
+          }
+        },
+      });
+    },
+    { scope: sectionRef, dependencies: [submitted] }
+  );
 
   useEffect(() => {
     if (submitted && successRef.current) {
@@ -60,14 +65,18 @@ export function EmailCapture() {
     <section ref={sectionRef} className="py-20 md:py-28 bg-tapcraft-blue">
       <div className="max-w-3xl mx-auto px-6 text-center">
         {!submitted ? (
-          <div ref={formRef} style={{ opacity: 0 }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              Get Design Updates & Innovation Tips
-            </h2>
-            <p className="mt-4 text-blue-200 text-lg max-w-xl mx-auto">
-              Join our newsletter for the latest in 3D printing innovation, NFC
-              technology trends, and exclusive offers from the TapCraft team.
-            </p>
+          <div ref={formRef}>
+            <Copy animateOnScroll>
+              <h2 className="text-5xl md:text-6xl font-normal text-white">
+                Get Design Updates & Innovation Tips
+              </h2>
+            </Copy>
+            <Copy animateOnScroll delay={0.2}>
+              <p className="mt-4 text-blue-200 text-lg max-w-xl mx-auto">
+                Join our newsletter for the latest in 3D printing innovation, NFC
+                technology trends, and exclusive offers from the TapCraft team.
+              </p>
+            </Copy>
 
             <form
               onSubmit={handleSubmit}
@@ -79,7 +88,7 @@ export function EmailCapture() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
                 required
-                className="w-full flex-1 h-12 px-4 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-all"
+                className="w-full flex-1 h-12 px-4 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-transparent transition-[border-color,box-shadow] duration-200"
               />
               <Button
                 type="submit"

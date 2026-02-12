@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import Copy from "../Copy";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -137,53 +139,60 @@ export function FAQ() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!contentRef.current) return;
+  useGSAP(
+    () => {
+      if (contentRef.current) {
+        gsap.set(contentRef.current, { opacity: 0, y: 40 });
+      }
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        contentRef.current,
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          if (contentRef.current) {
+            gsap.to(contentRef.current, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" });
+          }
+        },
+      });
+    },
+    { scope: sectionRef }
+  );
 
   const handleToggle = useCallback((index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 bg-tapcraft-light">
-      <div className="max-w-3xl mx-auto px-6">
-        <div ref={contentRef} style={{ opacity: 0 }}>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-tapcraft-dark">
-              Frequently Asked Questions
-            </h2>
-            <p className="mt-4 text-tapcraft-gray text-lg">
-              Everything you need to know about our 3D + NFC products and
-              process.
-            </p>
-          </div>
+		<section ref={sectionRef} className="py-20 md:py-28 bg-tapcraft-light">
+			<div className="max-w-3xl mx-auto px-6">
+				<div ref={contentRef}>
+					<div className="text-center mb-12">
+            <Copy animateOnScroll>
+              <h2 className="text-5xl md:text-6xl text-tapcraft-dark font-normal">
+                Frequently Asked Questions
+              </h2>
+            </Copy>
+            <Copy animateOnScroll delay={0.2}>
+              <p className="mt-4 text-tapcraft-gray text-lg">
+                Everything you need to know about our 3D + NFC products and
+                process.
+              </p>
+            </Copy>
+					</div>
 
-          <div className="bg-white rounded-2xl shadow-sm p-6 md:p-8">
-            {faqs.map((faq, index) => (
-              <FAQItemComponent
-                key={index}
-                item={faq}
-                isOpen={openIndex === index}
-                onToggle={() => handleToggle(index)}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+					<div className="bg-white rounded-2xl shadow-sm p-6 md:p-8">
+						{faqs.map((faq, index) => (
+							<FAQItemComponent
+								key={index}
+								item={faq}
+								isOpen={openIndex === index}
+								onToggle={() => handleToggle(index)}
+							/>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+	);
 }
