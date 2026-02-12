@@ -188,7 +188,7 @@ export function FAQ() {
                 </p>
               </Copy>
               <Copy animateOnScroll delay={0.1}>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold tracking-tight leading-[1.1]">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-normal tracking-tight leading-[1.1]">
                   Got Questions?
                   <br />
                   We&apos;ve Got Answers.

@@ -88,7 +88,7 @@ export function ProcessOverview() {
               </p>
             </Copy>
             <Copy animateOnScroll delay={0.1}>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-tapcraft-dark tracking-tight leading-[1.1]">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal text-tapcraft-dark tracking-tight leading-[1.1]">
                 From Idea to
                 <br />
                 Smart Product

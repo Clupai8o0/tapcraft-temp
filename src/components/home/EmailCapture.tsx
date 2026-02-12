@@ -90,7 +90,7 @@ export function EmailCapture() {
               </p>
             </Copy>
             <Copy animateOnScroll delay={0.1}>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-5">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white tracking-tight leading-[1.1] mb-5">
                 Get Design Updates &
                 <br />
                 Innovation Tips
@@ -142,7 +142,7 @@ export function EmailCapture() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
             </div>
-            <h2 className="text-3xl font-bold text-white mb-3">
+            <h2 className="text-3xl font-normal text-white mb-3">
               You&apos;re In!
             </h2>
             <p className="text-gray-300 text-lg max-w-md mx-auto">
