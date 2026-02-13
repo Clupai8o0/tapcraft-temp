@@ -70,14 +70,14 @@ export default function CustomizePage() {
     <>
       <LightHeader />
       <div className="flex min-h-screen flex-col bg-gray-50">
-        {/* Header */}
-        <header className="border-b border-gray-200 bg-white px-4 py-3 sm:px-6">
+        {/* Toolbar */}
+        <div className="border-b border-gray-200 bg-white px-4 py-3 sm:px-6">
           <div className="mx-auto flex max-w-7xl items-center justify-between">
             <div>
-              <h1 className="text-lg font-bold text-gray-900">
-                <span className="text-tapcraft-blue">TapCraft</span> Studio
+              <p className="text-tapcraft-blue text-xs font-semibold tracking-widest uppercase">Customize</p>
+              <h1 className="text-lg font-normal text-gray-900 mt-0.5">
+                3D NFC Tag Configurator
               </h1>
-              <p className="text-xs text-gray-400">3D NFC Tag Configurator</p>
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -103,7 +103,7 @@ export default function CustomizePage() {
                 type="button"
                 onClick={() => setIsContactOpen(true)}
                 className={cn(
-                  "rounded-lg bg-tapcraft-blue px-4 py-2 text-xs font-semibold text-white transition-all cursor-pointer",
+                  "rounded-lg bg-tapcraft-blue px-4 py-2 text-xs font-semibold text-white transition-[background-color,box-shadow] cursor-pointer",
                   "hover:bg-tapcraft-blue/90 hover:shadow-md"
                 )}
               >
@@ -111,7 +111,7 @@ export default function CustomizePage() {
               </button>
             </div>
           </div>
-        </header>
+        </div>
 
         {/* Main content */}
         <div className="flex flex-1 flex-col lg:flex-row">

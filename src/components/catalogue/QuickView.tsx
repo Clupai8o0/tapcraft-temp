@@ -116,11 +116,11 @@ export function QuickView({ product, isOpen, onClose }: QuickViewProps) {
             <p className="text-xs font-semibold uppercase tracking-wider text-tapcraft-blue">
               {product.category}
             </p>
-            <h2 className="mt-2 text-2xl font-bold text-gray-900 leading-tight">
+            <h2 className="mt-2 text-2xl font-normal text-gray-900 leading-tight">
               {product.name}
             </h2>
             <div className="mt-3">
-              <p className="text-xl font-bold text-tapcraft-blue">
+              <p className="text-xl font-semibold text-tapcraft-blue">
                 {formatPrice(product.price.min, product.price.currency)}
                 {product.price.min !== product.price.max && (
                   <span className="text-gray-400 font-normal text-base">

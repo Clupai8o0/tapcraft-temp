@@ -165,7 +165,7 @@ export default function ContactForm({ isOpen, onClose, config }: ContactFormProp
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-gray-900">Quote Request Sent!</h2>
+            <h2 className="text-xl font-normal text-gray-900">Quote Request Sent!</h2>
             <p className="mt-2 text-sm text-gray-500 max-w-xs">
               Thanks for your interest! Our Melbourne team will review your configuration and get back to you within 24 hours.
             </p>
@@ -180,7 +180,7 @@ export default function ContactForm({ isOpen, onClose, config }: ContactFormProp
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="p-6">
             <div className="mb-6">
-              <h2 className="text-xl font-bold text-gray-900">Request a Quote</h2>
+              <h2 className="text-xl font-normal text-gray-900">Request a Quote</h2>
               <p className="mt-1 text-sm text-gray-500">
                 Fill in your details and we will send you a custom quote for your TapCraft order.
               </p>
@@ -322,7 +322,7 @@ export default function ContactForm({ isOpen, onClose, config }: ContactFormProp
                 type="submit"
                 disabled={isSubmitting}
                 className={cn(
-                  "flex-1 rounded-xl bg-tapcraft-blue py-2.5 text-sm font-semibold text-white transition-all cursor-pointer",
+                  "flex-1 rounded-xl bg-tapcraft-blue py-2.5 text-sm font-semibold text-white transition-[background-color,opacity] cursor-pointer",
                   "hover:bg-tapcraft-blue/90 disabled:cursor-not-allowed disabled:opacity-60"
                 )}
               >

@@ -39,7 +39,7 @@ export function CategoryNav({
               key={category.slug}
               onClick={() => onCategoryChange(category.slug)}
               className={cn(
-                'shrink-0 snap-start rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 whitespace-nowrap cursor-pointer',
+                'shrink-0 snap-start rounded-full px-5 py-2.5 text-sm font-medium transition-[background-color,color,box-shadow] duration-200 whitespace-nowrap cursor-pointer',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tapcraft-blue focus-visible:ring-offset-2',
                 isActive
                   ? 'bg-tapcraft-blue text-white shadow-md shadow-tapcraft-blue/25'

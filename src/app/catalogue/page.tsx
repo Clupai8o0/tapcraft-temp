@@ -183,7 +183,10 @@ export default function CataloguePage() {
         {/* Page header */}
         <div className="bg-white border-b border-gray-200">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
+          <p className="text-tapcraft-blue text-sm font-semibold tracking-widest uppercase mb-3">
+            Our Products
+          </p>
+          <h1 className="text-3xl sm:text-4xl font-normal text-gray-900 tracking-tight">
             Product Catalogue
           </h1>
           <p className="mt-2 text-base sm:text-lg text-gray-500 max-w-2xl">
@@ -195,7 +198,7 @@ export default function CataloguePage() {
       </div>
 
       {/* Category navigation */}
-      <div className="bg-white border-b border-gray-100 sticky top-0 z-30">
+      <div className="bg-white border-b border-gray-100 sticky top-20 z-30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
           <CategoryNav
             activeCategory={activeCategory}
@@ -229,7 +232,7 @@ export default function CataloguePage() {
             </svg>
             Filters
             {activeFilterCount > 0 && (
-              <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-tapcraft-blue text-[10px] font-bold text-white">
+              <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-tapcraft-blue text-[10px] font-semibold text-white">
                 {activeFilterCount}
               </span>
             )}

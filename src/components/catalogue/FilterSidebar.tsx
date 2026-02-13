@@ -222,9 +222,9 @@ export function FilterSidebar({
       {/* Header */}
       <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4">
         <div className="flex items-center gap-2">
-          <h2 className="text-lg font-bold text-gray-900">Filters</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
           {activeFilterCount > 0 && (
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-tapcraft-blue text-[10px] font-bold text-white">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-tapcraft-blue text-[10px] font-semibold text-white">
               {activeFilterCount}
             </span>
           )}
@@ -276,7 +276,7 @@ export function FilterSidebar({
                   }))
                 }
                 className={cn(
-                  'rounded-lg border px-3 py-2 text-xs font-medium transition-all duration-150 cursor-pointer',
+                  'rounded-lg border px-3 py-2 text-xs font-medium transition-[border-color,background-color,color] duration-150 cursor-pointer',
                   localFilters.priceRange === range.value
                     ? 'border-tapcraft-blue bg-tapcraft-blue/5 text-tapcraft-blue'
                     : 'border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50',
@@ -349,7 +349,7 @@ export function FilterSidebar({
     <>
       {/* Desktop sidebar */}
       <aside className="hidden lg:block w-[280px] shrink-0">
-        <div className="sticky top-6 rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
+        <div className="sticky top-28 rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
           {sidebarContent}
         </div>
       </aside>

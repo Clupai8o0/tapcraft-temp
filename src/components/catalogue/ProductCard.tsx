@@ -29,7 +29,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
   const prodTime = formatProductionTime(product.specifications.productionTime);
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:shadow-lg hover:shadow-gray-200/50 hover:border-gray-300">
+    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-[box-shadow,border-color] duration-300 hover:shadow-lg hover:shadow-gray-200/50 hover:border-gray-300">
       {/* Image area */}
       <div className="relative aspect-square overflow-hidden bg-gray-50">
         <div className="h-full w-full transition-transform duration-500 group-hover:scale-105">
@@ -50,7 +50,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
         )}
 
         {/* Quick View overlay on hover */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/10 group-hover:opacity-100">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-[background-color,opacity] duration-300 group-hover:bg-black/10 group-hover:opacity-100">
           <Button
             variant="primary"
             size="sm"
@@ -58,7 +58,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
               e.preventDefault();
               onQuickView(product);
             }}
-            className="translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+            className="translate-y-2 opacity-0 transition-[transform,opacity] duration-300 group-hover:translate-y-0 group-hover:opacity-100"
           >
             <svg
               className="h-4 w-4"
@@ -133,7 +133,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
 
         {/* Price */}
         <div className="mt-3 pt-3 border-t border-gray-100">
-          <p className="text-lg font-bold text-tapcraft-blue">
+          <p className="text-lg font-semibold text-tapcraft-blue">
             {formatPrice(product.price.min, product.price.currency)}
             {product.price.min !== product.price.max && (
               <span className="text-gray-400 font-normal text-sm">

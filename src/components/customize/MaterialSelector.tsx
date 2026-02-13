@@ -64,7 +64,7 @@ export default function MaterialSelector({ config, onChange }: MaterialSelectorP
                 type="button"
                 onClick={() => onChange({ material: mat.id as MaterialId })}
                 className={cn(
-                  "w-full rounded-xl border-2 p-4 text-left transition-all cursor-pointer",
+                  "w-full rounded-xl border-2 p-4 text-left transition-[border-color,background-color,box-shadow] cursor-pointer",
                   "hover:border-tapcraft-blue/40 hover:shadow-sm",
                   isActive
                     ? "border-tapcraft-blue bg-tapcraft-blue/5 shadow-sm"
@@ -142,7 +142,7 @@ export default function MaterialSelector({ config, onChange }: MaterialSelectorP
                 type="button"
                 onClick={() => onChange({ finish: finish.id as FinishId })}
                 className={cn(
-                  "rounded-xl border-2 px-3 py-3 text-left transition-all cursor-pointer",
+                  "rounded-xl border-2 px-3 py-3 text-left transition-[border-color,background-color,color] cursor-pointer",
                   "hover:border-tapcraft-blue/40",
                   isActive
                     ? "border-tapcraft-blue bg-tapcraft-blue text-white"

@@ -103,7 +103,7 @@ export default function TextCustomization({ config, onChange }: TextCustomizatio
                 type="button"
                 onClick={() => updateText({ effect: effect.id as TextEffectId })}
                 className={cn(
-                  "rounded-xl border-2 p-3 text-left transition-all cursor-pointer",
+                  "rounded-xl border-2 p-3 text-left transition-[border-color,background-color,color] cursor-pointer",
                   "hover:border-tapcraft-blue/40",
                   isActive
                     ? "border-tapcraft-blue bg-tapcraft-blue/5"

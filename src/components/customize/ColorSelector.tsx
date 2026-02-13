@@ -74,7 +74,7 @@ export default function ColorSelector({ config, onChange }: ColorSelectorProps) 
                 type="button"
                 onClick={() => handleSwatchClick(hex)}
                 className={cn(
-                  "h-10 w-10 rounded-xl border-2 transition-all cursor-pointer",
+                  "h-10 w-10 rounded-xl border-2 transition-[border-color,transform,box-shadow] cursor-pointer",
                   "hover:scale-110 hover:shadow-md",
                   config.color.toLowerCase() === hex.toLowerCase()
                     ? "border-tapcraft-blue ring-2 ring-tapcraft-blue/30 scale-110"
@@ -117,7 +117,7 @@ export default function ColorSelector({ config, onChange }: ColorSelectorProps) 
               onClick={() => handleSwatchClick(swatch.hex)}
               title={swatch.name}
               className={cn(
-                "group relative aspect-square rounded-xl border-2 transition-all cursor-pointer",
+                "group relative aspect-square rounded-xl border-2 transition-[border-color,transform,box-shadow] cursor-pointer",
                 "hover:scale-110 hover:shadow-md",
                 config.color.toLowerCase() === swatch.hex.toLowerCase()
                   ? "border-tapcraft-blue ring-2 ring-tapcraft-blue/30 scale-110"
@@ -173,7 +173,7 @@ export default function ColorSelector({ config, onChange }: ColorSelectorProps) 
             onClick={handleCustomHexSubmit}
             disabled={!/^[0-9A-Fa-f]{6}$/.test(customHex)}
             className={cn(
-              "rounded-lg bg-tapcraft-blue px-4 py-2.5 text-xs font-semibold text-white transition-all cursor-pointer",
+              "rounded-lg bg-tapcraft-blue px-4 py-2.5 text-xs font-semibold text-white transition-[background-color,opacity] cursor-pointer",
               "hover:bg-tapcraft-blue/90 disabled:cursor-not-allowed disabled:opacity-40"
             )}
           >

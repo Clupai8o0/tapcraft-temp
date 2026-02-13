@@ -28,7 +28,7 @@ export default function NFCPlacementControl({ config, onChange }: NFCPlacementCo
                 type="button"
                 onClick={() => onChange({ nfcChip: chip.id as NFCChipId })}
                 className={cn(
-                  "w-full rounded-xl border-2 p-4 text-left transition-all cursor-pointer",
+                  "w-full rounded-xl border-2 p-4 text-left transition-[border-color,background-color,box-shadow] cursor-pointer",
                   "hover:border-tapcraft-blue/40 hover:shadow-sm",
                   isActive
                     ? "border-tapcraft-blue bg-tapcraft-blue/5 shadow-sm"
@@ -40,7 +40,7 @@ export default function NFCPlacementControl({ config, onChange }: NFCPlacementCo
                     <div className="flex items-center gap-2">
                       <h4
                         className={cn(
-                          "text-sm font-bold",
+                          "text-sm font-semibold",
                           isActive ? "text-tapcraft-blue" : "text-gray-800"
                         )}
                       >
@@ -61,7 +61,7 @@ export default function NFCPlacementControl({ config, onChange }: NFCPlacementCo
                   </div>
                   <span
                     className={cn(
-                      "shrink-0 text-xs font-bold",
+                      "shrink-0 text-xs font-semibold",
                       "text-gray-700"
                     )}
                   >
@@ -84,7 +84,7 @@ export default function NFCPlacementControl({ config, onChange }: NFCPlacementCo
                 <div className="mt-3 flex items-center gap-2">
                   <div
                     className={cn(
-                      "h-4 w-4 rounded-full border-2 transition-all",
+                      "h-4 w-4 rounded-full border-2 transition-[border-color]",
                       isActive ? "border-tapcraft-blue" : "border-gray-300"
                     )}
                   >

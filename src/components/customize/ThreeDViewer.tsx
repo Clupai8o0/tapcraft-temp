@@ -69,7 +69,7 @@ export default function ThreeDViewer({
           "flex items-center gap-1.5 rounded-lg px-3 py-2",
           "bg-white/90 backdrop-blur-sm shadow-md",
           "text-xs font-medium text-gray-700",
-          "transition-all hover:bg-white hover:shadow-lg",
+          "transition-[background-color,box-shadow] hover:bg-white hover:shadow-lg",
           "cursor-pointer"
         )}
         aria-label="Reset camera view"

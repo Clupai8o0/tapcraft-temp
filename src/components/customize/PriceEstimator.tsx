@@ -66,7 +66,7 @@ export default function PriceEstimator({ config, onQuantityChange }: PriceEstima
       {/* Expandable breakdown */}
       <div ref={breakdownRef} className="overflow-hidden" style={{ height: 0, display: "none" }}>
         <div className="border-b border-gray-100 px-4 py-4 sm:px-6">
-          <h4 className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-400">
+          <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
             Price Breakdown (per unit)
           </h4>
           <div className="space-y-2">
@@ -117,7 +117,7 @@ export default function PriceEstimator({ config, onQuantityChange }: PriceEstima
             <div className="border-t border-gray-100 pt-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-gray-700">Subtotal per unit</span>
-                <span className="text-xs font-bold text-gray-800">
+                <span className="text-xs font-semibold text-gray-800">
                   ${breakdown.subtotalPerUnit.toFixed(2)}
                 </span>
               </div>
@@ -164,12 +164,12 @@ export default function PriceEstimator({ config, onQuantityChange }: PriceEstima
           <div>
             <p className="text-xs text-gray-500">Estimated price</p>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-xl font-bold text-tapcraft-blue">
+              <span className="text-xl font-semibold text-tapcraft-blue">
                 ${priceRange.perUnit.toFixed(2)}
               </span>
               <span className="text-xs text-gray-400">/unit</span>
               {discount > 0 && (
-                <span className="rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-bold text-green-700">
+                <span className="rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-semibold text-green-700">
                   -{discount}%
                 </span>
               )}
@@ -199,7 +199,7 @@ export default function PriceEstimator({ config, onQuantityChange }: PriceEstima
 
           <div className="text-right hidden sm:block">
             <p className="text-[10px] text-gray-400">Total estimate</p>
-            <p className="text-sm font-bold text-gray-800">
+            <p className="text-sm font-semibold text-gray-800">
               ${total.toFixed(2)}
             </p>
           </div>

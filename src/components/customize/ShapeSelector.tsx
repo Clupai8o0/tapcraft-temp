@@ -66,7 +66,7 @@ export default function ShapeSelector({ config, onChange }: ShapeSelectorProps) 
               type="button"
               onClick={() => handleShapeSelect(shape.id)}
               className={cn(
-                "flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-all cursor-pointer",
+                "flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-[border-color,background-color,color] cursor-pointer",
                 "hover:border-tapcraft-blue/40 hover:bg-tapcraft-blue/5",
                 config.shape === shape.id
                   ? "border-tapcraft-blue bg-tapcraft-blue/10 text-tapcraft-blue"
@@ -90,19 +90,19 @@ export default function ShapeSelector({ config, onChange }: ShapeSelectorProps) 
           <div className="mt-3 flex gap-3">
             <div className="rounded-lg bg-gray-50 px-3 py-2">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">Width</p>
-              <p className="text-sm font-bold text-tapcraft-blue">
+              <p className="text-sm font-semibold text-tapcraft-blue">
                 {selectedShape.defaultDimensions.width}mm
               </p>
             </div>
             <div className="rounded-lg bg-gray-50 px-3 py-2">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">Height</p>
-              <p className="text-sm font-bold text-tapcraft-blue">
+              <p className="text-sm font-semibold text-tapcraft-blue">
                 {selectedShape.defaultDimensions.height}mm
               </p>
             </div>
             <div className="rounded-lg bg-gray-50 px-3 py-2">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">Size Factor</p>
-              <p className="text-sm font-bold text-tapcraft-blue">
+              <p className="text-sm font-semibold text-tapcraft-blue">
                 {selectedShape.sizeModifier}x
               </p>
             </div>
