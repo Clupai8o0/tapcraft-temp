@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import { useCart } from "@/hooks/useCart";
 import { Button } from "@/components/shared/Button";
@@ -12,6 +12,29 @@ interface CartDrawerProps {
 export function CartDrawer({ variant = "dark" }: CartDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { cart, removeFromCart, updateQuantity } = useCart();
+
+  /**
+   * Navigate to Shopify checkout, appending the UpPromote linker
+   * parameter so affiliate attribution follows the user cross-domain.
+   *
+   * Until the Shopify Storefront Cart API is wired up, this falls back
+   * to the local /checkout route.
+   */
+  const handleCheckout = useCallback(() => {
+    // TODO: use cart.checkoutUrl from Shopify once integrated
+    const raw = "/checkout";
+
+    try {
+      const url = new URL(raw, window.location.origin);
+      if (typeof upTag !== "undefined") {
+        const linker = upTag("app", "linker");
+        if (linker) url.searchParams.set("_upl", linker);
+      }
+      window.location.href = url.toString();
+    } catch {
+      window.location.href = raw;
+    }
+  }, []);
 
   return (
     <>
@@ -127,10 +150,15 @@ export function CartDrawer({ variant = "dark" }: CartDrawerProps) {
                   ${cart.totalPrice.toFixed(2)}
                 </span>
               </div>
-              <Button asChild className="w-full">
-                <Link href="/checkout" onClick={() => setIsOpen(false)}>
-                  Proceed to Checkout
-                </Link>
+              <Button
+                className="w-full"
+                style={{ color: "white" }}
+                onClick={() => {
+                  setIsOpen(false);
+                  handleCheckout();
+                }}
+              >
+                Proceed to Checkout
               </Button>
             </div>
           </>

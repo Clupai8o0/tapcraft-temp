@@ -17,6 +17,7 @@ const navLinks = [
   { href: "/catalogue", label: "Catalogue" },
   { href: "/customize", label: "Customize" },
   { href: "/contact", label: "Contact" },
+  { href: "/affiliates", label: "Affiliates" },
 ] as const;
 
 export function LightHeader() {
